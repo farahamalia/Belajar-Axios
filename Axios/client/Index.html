@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Belajar Axios</title>
+    
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <h1>Belajar Axios</h1>
+        <button onclick="addUser()">Add User</button>
+        <button onclick="UpdateUser()">Update User</button>
+        <button onclick="deleteUser()">Delete User</button>    
+   
+        
+        <script>
+            //const myInstance = axios.create({
+            //    baseURL:"http://localhost:3000",
+            //});
+
+             axios
+             .get("http://localhost:3000/users")
+             .then(({data}) => {
+                console.log("Datanya berhasil", data);
+             })
+             .catch((err) => {
+                console.log("Datanya gagal", err);
+             })
+             .finally(() =>{
+                console.log("request selesai")
+            });
+            //add user
+            function addUser(){
+            const newUser = {
+             name : "Farah",
+             email : "farah@gmail.com",
+        };
+            axios
+            .post("http://localhost:3000/users", newUser)
+            .then (({data}) => {
+                console.log("Datanya berhasil", data);
+            })
+            .catch((err) => {
+                console.log("Datanya gagal", err);
+            })
+            .finally(() =>{
+                console.log("request selesai")
+            });
+         }
+        
+
+        //update user
+        function UpdateUser(){
+        const updateData ={
+            name: "Jhon",
+            email : "jhonUpdate@gmail.com"
+        };
+
+        const userID ="3";  
+
+        axios
+        .put('http://localhost:3000/users/${userID}', updateData)
+        .then (({data}) => {
+            console.log("Datanya berhasil", data);
+        })
+        .catch((err) => {
+            console.log("Datanya gagal", err);
+        })
+        .finally(() =>{
+            console.log("request selesai")
+        }); 
+        }
+
+        //delete user
+        function deleteUser(){
+        const userID="4"; //cek lagi
+
+        axios
+        .delete(`http://localhost:3000/users/${userId}`)
+        .then (({data}) => {
+            console.log("Datanya berhasil", data);
+        })
+        .catch((err) => {
+            console.log("Datanya gagal", err);
+        })
+        .finally(() =>{
+            console.log("request selesai")
+        }); 
+        }
+        </script>
+    </body>
+
+    </html>
